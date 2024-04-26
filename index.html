@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo Remiseria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!--Titulo-->
+    <h1>Calculadora Para Remiseria</h1>
+
+    <!--Buscador de clientes registrados.-->
+    <div>
+        <label id="primerPregunta"></label>
+        <input id="buscarCliente" type="text" placeholder="Buscar Cliente">
+        <input id="clienteViejo" type="submit" value="Aceptar">
+    </div>
+
+    <br>
+
+    <!--Flex cliente nuevo.-->
+    <div>    
+        <div>
+            <label id="agregarNuevoCliente"></label>
+        </div>
+        <div>
+            <label id="nombreClienteNuevo"></label>
+            <input id="nombre" type="text" placeholder="Nombre nuevo cliente.">
+        </div>
+        <div>
+            <label id="direccionClienteNuevo"></label>
+            <input id="direccion" type="text" placeholder="Direccion nuevo cliente.">
+        </div>
+        <div>
+            <label id="telefonoClienteNuevo"></label>
+            <input id="telefono" type="number" placeholder="Telefono nuevo cliente.">
+        </div>
+        <div>
+            <label id="clasificacionClienteNuevo"></label>
+            <input id="clasificacion" type="text" placeholder="Clasificacion nuevo cliente.">
+        </div>
+        <div>
+            <input id="registrar" type="submit" value="Registrar Nuevo Cliente">
+        </div>
+    </div>
+
+    <br>
+
+    <!--Preguntas de cuanto km y su valor-->
+    <div>
+        <div>
+            <label id="preguntaCuantosKm"></label>
+            <input id="cantidadKm" type="number" placeholder="Cantidad de Km.">
+            <input id="km" type="submit" value="Aceptar">
+        </div>
+
+        <br>
+
+        <div>
+            <label id="preguntaValorKm"></label>
+            <input id="valorKm" type="number" placeholder="Valor de los Km.">
+            <input id="cuantoValeKm" type="submit" value="Aceptar">
+        </div>
+
+        <br>
+
+        <div>
+            <label id="solicitaEspera"></label>
+            <input id="esperaEnElViaje" type="number" placeholder="Valor de la espera.">
+            <input id="espera" type="submit" value="Aceptar">
+        </div>
+    </div>
+
+    <br>
+    
+    <!--Flex final de calculos-->
+    <div>
+        <div>
+            <label id="fraseSinFac"></label>
+            <input id="calcularSinFac" type="submit" value="Calcular">
+        </div>
+        
+        <br>
+
+        <div>
+            <label id="fraseConFac"></label>
+            <input id="calcularConFac" type="submit" value="calcular">
+        </div>
+
+        <br>
+
+        <div>
+            <label id="fraseFacConEspera"></label>
+            <input id="calcularFacConEspera" type="submit" value="Calcular">
+        </div>
+
+        <br>
+
+        <div>
+            <label id="fraseSinFacConEspera"></label>
+            <input id="calcularSinFacConEspera" type="submit" value="Calcular">
+        </div>
+    </div>
+
+    <br>
+    
+    <!--Cajon de texto final para respuestas de las operaciones-->
+    <div>
+        <textarea name="" id="mensaje" cols="30" rows="10"></textarea>
+    </div>    
+
+    <script src="javascript/calculadora.js"></script>
+</body>
+</html>
