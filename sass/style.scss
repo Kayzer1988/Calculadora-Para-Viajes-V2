@@ -1,0 +1,58 @@
+body{
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% );
+    color: white;
+}
+
+h1 {
+    font-size: 3.0rem;
+    text-decoration: underline;
+    text-align: center;
+}
+
+h2 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+.flex-uno {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+    .caja {
+        text-align: center;
+        border: 2px solid white;
+        width: 600px;
+        height: 200px;
+        margin: 25px;
+    }
+}
+
+.flex-dos {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    .caja-dos {
+        text-align: center;
+        border: 2px solid white;
+        width: 600px;
+        height: 250px;
+        margin: 25px;
+    }
+}
+
+.flex-tres {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    .caja-tres {
+        text-align: center;
+        border: 2px solid white;
+        width: 250px;
+        height: 40px;
+        margin: 25px;
+    }
+}
+.contenedor {
+    text-align: center;
+}

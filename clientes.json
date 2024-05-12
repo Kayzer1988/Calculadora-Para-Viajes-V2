@@ -1,0 +1,28 @@
+{ 
+    "clientes": [
+        {
+            "nombre": "Daiana Alderete",
+            "direccion": "Belgrano 1259",
+            "telefono": 1189105641,
+            "clasificacion": "VIP"
+        },
+        {
+            "nombre": "Ariel Kubar",
+            "direccion": "Fatima 550",
+            "telefono": 1152857998,
+            "clasificacion": "VIP"
+        },
+        {
+            "nombre": "Rufina Silvero",
+            "direccion": "Av. San Martin 250",
+            "telefono": 1156327866,
+            "clasificacion": "Basico"
+        },
+        {
+            "nombre": "Martin Acosta",
+            "direccion": "Croacia 3560",
+            "telefono": 1155698525,
+            "clasificacion": "Basico"
+        }
+    ]
+}

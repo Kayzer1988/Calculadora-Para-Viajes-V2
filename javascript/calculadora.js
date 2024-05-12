@@ -9,36 +9,40 @@ let totalViaje
 let descuentoVip
 let clasiFiltrado
 
-
-
 //array
-let clientesRemiseria = [
-    {
-        nombre: "Daiana Alderete",
-        direccion: "Belgrano 1259",
-        telefono: 1189105641,
-        clasificacion: "VIP"
-    },
-    {
-        nombre: "Ariel Kubar",
-        direccion: "Fatima 550",
-        telefono: 1152857998,
-        clasificacion: "VIP"
-    },
-    {
-        nombre: "Rufina Silvero",
-        direccion: "Av. San Martin 250",
-        telefono: 1156327866,
-        clasificacion: "Basico"
-    },
-    {
-        nombre: "Martin Acosta",
-        direccion: "Croacia 3560",
-        telefono: 1155698525,
-        clasificacion: "Basico"
-    }
+let clientesRemiseria = [];
 
-];
+// Funcion para obtener información de la simulacion de api local. 
+async function obtenerClientesJSON(){
+    const URLClientes = '../clientes.json';
+    try{
+        const respuesta = await fetch(URLClientes);
+        const info = await respuesta.json();
+        console.log(info);
+        
+        // Agregar nuevos clientes al array existente clientesRemiseria
+        info.clientes.forEach(cliente => {
+            clientesRemiseria.push(new clientesNuevos(cliente.nombre, cliente.direccion, cliente.telefono, cliente.clasificacion));
+        });
+        
+        console.log(clientesRemiseria);
+
+        // Llenar el select con los nombres de los clientes
+        const selectBuscarCliente = document.getElementById("buscarCliente");
+        clientesRemiseria.forEach(cliente => {
+            const option = document.createElement("option");
+            option.text = cliente.nombre;
+            selectBuscarCliente.add(option);
+        });        
+        
+    } catch (error){
+        console.log(error)
+    }
+}
+
+// Llamando a la función.
+obtenerClientesJSON();
+
 
 // Obtener los datos del localStorage
 
@@ -70,7 +74,7 @@ class clientesNuevos{
 //Función filtrar clientes VIP
 
 function filtrarClientesVip(){ 
-return clientesRemiseria.filter(cliente => cliente.clasificacion.toUpperCase() === "VIP");
+    return clientesRemiseria.filter(cliente => cliente.clasificacion.toUpperCase() === "VIP");
 }
 clasiFiltrado = filtrarClientesVip();
 
@@ -115,8 +119,24 @@ fraseFacConEspera.innerText = "Calcular total con factura y espera.";
 const fraseSinFacConEspera = document.getElementById("fraseSinFacConEspera");
 fraseSinFacConEspera.innerText = "Calcular total solo con espera.";
 
+//Función para colocar datos del cliente elegido en pantalla
+function datosDeClientePantalla() {
+    if (clienteElegido) {
+        // Construir el texto con los datos del cliente elegido
+        const datosClienteHTML = 
+        "Nombre: " + clienteElegido.nombre + "<br>" +
+        "Dirección: " + clienteElegido.direccion + "<br>" +
+        "Teléfono: " + clienteElegido.telefono + "<br>" +
+        "Clasificación: " + clienteElegido.clasificacion;
+        
+        document.getElementById("datosCliente").innerHTML = datosClienteHTML;
+    } else {
+        document.getElementById("datosCliente").innerHTML = "No se ha seleccionado ningún cliente.";
+    }
+}
 
-//Funcion para buscar clientes ya registrados
+
+//Función para buscar clientes ya registrados
 
 const clienteViejo = document.getElementById("clienteViejo");
 clienteViejo.addEventListener("click",buscandoCliente);
@@ -126,13 +146,26 @@ function buscandoCliente(){
     let buscarCliente = document.getElementById("buscarCliente").value;
     
     //Función de busqueda de cliente
-    clienteElegido = clientesRemiseria.find(cliente =>cliente.nombre.toLowerCase().includes(buscarCliente.toLowerCase()))
+    clienteElegido = clientesRemiseria.find(cliente =>cliente.nombre.toLowerCase().includes(buscarCliente.toLowerCase()));
 
     if (clienteElegido){
-        console.log("cliente encontrado "+clienteElegido.nombre);
+        console.log("cliente encontrado "+ clienteElegido.nombre)
+        datosDeClientePantalla();
+        Swal.fire({
+            title: "Excelente!",
+            text: "Seleccionaste al cliente " + clienteElegido.nombre,
+            icon: "success"
+          });
     } else{
-        alert("Cliente no encontrado, intente nuevamente.");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Cliente no encontrado, intente nuevamente.",
+          });
     }
+    
+    // Actualizar clientes VIP filtrados
+    clasiFiltrado = filtrarClientesVip();    
 }
 
 //Funcion para registrar clientes nuevos.
@@ -160,8 +193,17 @@ function registrandoCliente(){
         clienteElegido = nuevoCliente;
         console.log("El cliente ingresado es "+clienteElegido.nombre)
         clasiFiltrado = filtrarClientesVip();
+        Swal.fire({
+            title: "Excelente!",
+            text: "Agregaste al nuevo cliente " + clienteElegido.nombre,
+            icon: "success"
+          });
     }else{
-        alert("No ingreso un dato valido, ingrese VIP o Basico.")
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No ingreso un dato valido, ingrese VIP o Basico.",
+          });
     }
 }
 
@@ -176,6 +218,11 @@ function cuantosKm(){
     const cantidadKm = document.getElementById("cantidadKm").value;
     kmDelViaje = cantidadKm
     console.log("la cantidad de km son "+kmDelViaje)
+    Swal.fire({
+        title: "Excelente!",
+        text: "Agregaste la cantidad de Km del viaje.",
+        icon: "success"
+      });
 }
 
 //Funcion pregunta del valor del km.
@@ -187,6 +234,11 @@ function precioKm(){
     const valorkm = document.getElementById("valorKm").value;
     valorDelKm = valorkm
     console.log("El precio del km es $"+valorDelKm)
+    Swal.fire({
+        title: "Excelente!",
+        text: "Agregaste el precio del Km del viaje.",
+        icon: "success"
+      });
 }
 
 //Funcion para la espera.
@@ -198,6 +250,11 @@ function calcularEspera(){
     const esperaEnElViaje = document.getElementById("esperaEnElViaje").value;
     valorEspera = parseInt (esperaEnElViaje)
     console.log("la espera vale "+valorEspera)
+    Swal.fire({
+        title: "Excelente!",
+        text: "Agregaste el precio de la espera del viaje.",
+        icon: "success"
+      });
 }
 
 
