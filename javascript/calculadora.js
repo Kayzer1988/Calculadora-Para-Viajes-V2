@@ -14,7 +14,7 @@ let clientesRemiseria = [];
 
 // Funcion para obtener información de la simulacion de api local. 
 async function obtenerClientesJSON(){
-    const URLClientes = '../clientes.json';
+    const URLClientes = './clientes.json';
     try{
         const respuesta = await fetch(URLClientes);
         const info = await respuesta.json();
